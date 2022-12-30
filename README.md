@@ -1,4 +1,4 @@
-# App4games
+# App4games - with the help of rawg.io
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.2.
 

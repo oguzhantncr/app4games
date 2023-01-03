@@ -1,0 +1,12 @@
+<div class="w-64 m-2 border-2 rounded-lg drop-shadow-md bg-gray-800 border-gray-500
+            hover:drop-shadow-2xl">
+    <img class="rounded-t-lg" 
+         [src]="game.background_image" 
+         alt="Game Image">
+    <div class="p-3">
+        <span *ngFor="let gamePlatform of game.platforms"></span>
+        <div class="text-white tracking-tight font-bold text-xl">
+            {{ game.name }}
+        </div>
+    </div>
+</div>

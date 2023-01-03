@@ -4,7 +4,9 @@
          [src]="game.background_image" 
          alt="Game Image">
     <div class="p-3">
-        <span *ngFor="let gamePlatform of game.platforms"></span>
+        <span *ngFor="let parentPlatform of game.parent_platforms">
+            <mat-icon class="mr-2 platform-icons" [svgIcon]="parentPlatform.platform.slug"></mat-icon>
+        </span>
         <div class="text-white tracking-tight font-bold text-xl">
             {{ game.name }}
         </div>

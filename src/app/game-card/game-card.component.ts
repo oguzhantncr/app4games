@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Game } from '../interfaces';
+import { GameCardService } from '../services/game-card.service';
 
 
 @Component({
@@ -11,14 +12,13 @@ export class GameCardComponent implements OnInit {
 
   @Input() public game: Game;
   
-  public customIcons: string[] = ['windows', 'playstation', 'xbox'];
+  public customIcons: string[] = ['pc', 'playstation', 'xbox'];
 
-  constructor() {
-         
+  constructor(private gameService: GameCardService) {
+         this.customIcons.forEach((icon: string) => {
+          this.gameService.addCustomIcon(icon);
+         });
   }
-
-
-  
 
   ngOnInit() {
   }

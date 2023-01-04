@@ -1,1 +1,1 @@
-<app-game-card [game]="game"></app-game-card>
+<app-game-card *ngFor="let gameElement of gameList$ | async" [game]="gameElement"></app-game-card>

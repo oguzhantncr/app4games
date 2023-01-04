@@ -49,6 +49,12 @@ export interface EsrbRating {
   slug: string;
 }
 
+export interface ParentPlatformInfo {
+  id:   number;
+  name: string;
+  slug: string;
+}
+
 export interface Genre {
   id:               number;
   name:             string;
@@ -76,7 +82,7 @@ export enum Language {
 }
 
 export interface ParentPlatform {
-  platform: EsrbRating;
+  platform: ParentPlatformInfo;
 }
 
 export interface PlatformElement {

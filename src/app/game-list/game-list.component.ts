@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { GamesAPIService } from '../services/gamesAPI.service';
 import { Game } from '../interfaces';
+import { GameCardService } from '../services/game-card.service';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-game-list',
@@ -9,18 +12,18 @@ import { Game } from '../interfaces';
 })
 export class GameListComponent implements OnInit {
 
-  public gameList: Game[];
-  public game: Game;
+  public gameList$: Observable<Game[]>;
 
-  constructor(private gamesAPIService: GamesAPIService) { }
+  constructor(private gamesAPIService: GamesAPIService,
+              private gameService: GameCardService) {
+    this.gameService.addPlatformIcons();
+  }
 
   ngOnInit(): void {
-    this.gamesAPIService.getGames()
-    .subscribe((games: any) => {
-      this.gameList = games.results;
-      this.game = this.gameList[4];
-      console.log(this.game);
-    })
+    this.gameList$ = this.gamesAPIService.getGames()
+    .pipe(map((games: any) => {
+      return games.results;
+    }))
   }
 
 }

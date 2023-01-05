@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input} from '@angular/core';
 import { Game } from '../interfaces';
-import { GameCardService } from '../services/game-card.service';
 
 @Component({
   selector: 'app-game-card',
@@ -10,6 +9,8 @@ import { GameCardService } from '../services/game-card.service';
 export class GameCardComponent {
 
   @Input() public game: Game;
+  
+  public mouseHover: boolean = false;
 
   constructor() { }
 }

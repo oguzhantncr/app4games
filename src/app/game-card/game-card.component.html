@@ -1,14 +1,26 @@
-<div *ngIf="game" class="w-56 m-2 border-2 rounded-lg drop-shadow-md bg-gray-800 border-gray-500
-            hover:drop-shadow-2xl">
+<div *ngIf="game" (mouseover)="mouseHover=true" (mouseleave)="mouseHover=false"
+      class="group w-56 m-2 border-2 rounded-lg drop-shadow-2xl bg-gray-800 border-gray-300 
+             transition-transform duration-500
+             hover:shadow-lg hover:shadow-gray-500 hover:scale-110">
     <img class="rounded-t-lg" 
          [src]="game.background_image" 
-         alt="Game Image">
-    <div class="p-3">
+         alt="Game Image"
+         style="width: 224px; height: 150px;">
+    <div class="p-2">
         <span *ngFor="let parentPlatform of game.parent_platforms">
             <mat-icon class="mr-2 platform-icons" [svgIcon]="parentPlatform.platform.slug"></mat-icon>
         </span>
-        <div class="text-white tracking-tight font-bold text-xl">
+        <div class="text-white tracking-tight font-bold text-base mt-2"
+             [class.truncate]="!mouseHover">
             {{ game.name }}
         </div>
+    </div>
+    <div *ngIf="mouseHover" class="mx-2 mb-2">
+        <button>
+            review
+        </button>
+        <button>
+            details
+        </button>
     </div>
 </div>

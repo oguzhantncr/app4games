@@ -1,1 +1,9 @@
-<app-game-card *ngFor="let gameElement of gameList$ | async" [game]="gameElement"></app-game-card>
+<div class="flex flex-row flex-wrap justify-evenly 
+          bg-zinc-500 border-gray-300
+            w-2/3 m-8 p-2
+            border-2 rounded-lg drop-shadow-2xl">
+    <app-game-card *ngFor="let gameElement of gameList$ | async" [game]="gameElement"></app-game-card>
+</div>
+<div>
+    pages
+</div>

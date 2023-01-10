@@ -7,12 +7,14 @@ import { MatIconModule } from '@angular/material/icon'
 import { AppComponent } from './app.component';
 import { GameCardComponent } from './game-card/game-card.component';
 import { GameListComponent } from './game-list/game-list.component';
+import { PaginatorComponent } from './common-components/paginator/paginator.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GameCardComponent,
-    GameListComponent
+    GameListComponent,
+    PaginatorComponent
   ],
   imports: [
     HttpClientModule,

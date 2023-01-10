@@ -1,5 +1,5 @@
 <div *ngIf="game" (mouseover)="mouseHover=true" (mouseleave)="mouseHover=false"
-      class="w-56 h-56 z-0 m-2 border-2 rounded-lg shadow-lg shadow-gray-300 bg-gray-900 border-gray-300 
+      class="w-56 h-56 z-0 m-2 border-2 rounded-lg shadow-md shadow-gray-300 bg-gray-900 border-gray-300 
              transition duration-700
              hover:scale-125 hover:z-50 hover:border-b-0 hover:rounded-b-none relative">
     <img class="rounded-t-lg" 
@@ -15,7 +15,10 @@
             {{ game.name }}
         </div>
     </div>
-    <div *ngIf="mouseHover" class="absolute w-56 p-2 -left-0.5 -bottom-7 border-x-2 border-b-2 rounded-b-lg bg-gray-900 border-gray-300">
+    <div *ngIf="mouseHover" class="flex flex-row justify-between
+                                   absolute w-56 p-2 -left-0.5 -bottom-7 
+                                   border-x-2 border-b-2 rounded-b-lg
+                                 bg-gray-900 border-gray-300">
         <!-- If more elements are added into this div, also adjust -bottom-7 -->
         <button class="text-white">
             review

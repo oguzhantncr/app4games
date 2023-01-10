@@ -11,7 +11,7 @@ export class PaginatorComponent {
   @Input() public pagesTotal: number;
 
   public pageNumbers: number[] = [1, 2, 3, 4, 5]
-  public currentPage: number = 2;
+  public currentPage: number = 1;
 
   clickPage(clickText: any) {
 
@@ -24,8 +24,6 @@ export class PaginatorComponent {
     else {
       this.currentPage = +clickText.innerText;
     }
-
-    console.log(this.currentPage);
   }
 
 }

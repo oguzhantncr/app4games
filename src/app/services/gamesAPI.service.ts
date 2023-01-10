@@ -10,8 +10,8 @@ export class GamesAPIService {
 
   constructor(private http: HttpClient) { }
 
-  getGames() {
-    return this.http.get('https://api.rawg.io/api/games?key=' + this.APIKey + '&page=1')
+  getGamesPerPage(page: string | null) {
+    return this.http.get('https://api.rawg.io/api/games?key=' + this.APIKey + '&page=' + page)
   }
 
   getParentPlatforms() {

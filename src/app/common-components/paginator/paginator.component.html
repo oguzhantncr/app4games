@@ -1,21 +1,44 @@
 <nav class="grid py-4">
-    <ul class="inline-flex justify-self-center -space-x-px">
-        <li>
-            <a routerLink="{{link}}" [queryParams]="{page: currentPage-1}" (click)="clickPage($event.target)"
-               class="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
-        </li>
-        
-        <li *ngFor="let pageNumber of pageNumbers">
-            <a routerLink="{{link}}" [queryParams]="{page: pageNumber}" (click)="clickPage($event.target)"
-               class="px-3 py-2 leading-tight border text-gray-500 bg-gray-800 border-gray-700 hover:bg-blue-100 hover:text-blue-700"
-               [class.bg-gray-700]="pageNumber === currentPage" [class.text-gray-100]="pageNumber === currentPage"
-               >{{pageNumber}}
-            </a>
-        </li>
+    <div class="flex justify-center">
+        <ul class="inline-flex mt-1 -space-x-px">
+            <li>
+                <a *ngIf="currentPage !== 1; else firstPage" routerLink="{{link}}" [queryParams]="{page: currentPage-1}" queryParamsHandling="merge" (click)="clickPage($event.target)"
+                   class="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+                
+                <ng-template #firstPage>
+                    <a routerLink="{{link}}" queryParamsHandling="preserve"
+                       class="px-3 py-2 ml-0.5 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+                </ng-template>
+            </li>
+            
+            <li *ngFor="let pageNumber of pageNumbers">
+                <a routerLink="{{link}}" [queryParams]="{page: pageNumber}" queryParamsHandling="merge" (click)="clickPage($event.target)"
+                   class="px-3 py-2 leading-tight border text-gray-500 bg-gray-800 border-gray-700 hover:bg-blue-100 hover:text-blue-700"
+                   [class.bg-gray-700]="pageNumber === currentPage" [class.text-gray-100]="pageNumber === currentPage"
+                   >{{pageNumber}}
+                </a>
+            </li>
+    
+            <li>
+                <a *ngIf="currentPage !== pagesTotal; else lastPage" routerLink="{{link}}" [queryParams]="{page: currentPage+1}" queryParamsHandling="merge" (click)="clickPage($event.target)"
+                   class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+                
+                <ng-template #lastPage>
+                    <a routerLink="{{link}}" [queryParams]="{page: pagesTotal}" queryParamsHandling="preserve"
+                       class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+                </ng-template>
+            </li>
+        </ul>
+    
+        <div class="ml-4 text-gray-400">
+            <select [(ngModel)]="amountPerPage" name="amountPerPage" id="amountPerPage" (change)="updateAmount()"
+                    class="border text-sm rounded-lg block w-full bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+            </select>
+            per page
+        </div>
 
-        <li>
-            <a routerLink="{{link}}" [queryParams]="{page: currentPage+1}" (click)="clickPage($event.target)"
-               class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
-        </li>
-    </ul>
+    </div>
 </nav>

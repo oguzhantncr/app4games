@@ -4,7 +4,7 @@ import { Game } from '../interfaces';
 import { GameCardService } from '../services/game-card.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-game-list',
@@ -14,36 +14,45 @@ import { ActivatedRoute } from '@angular/router';
 export class GameListComponent implements OnInit {
 
   public gameList$: Observable<Game[]>;
-  public gamesPerPage: number;
+  public gamesPerPage: string;
   public gamesTotal: number;
   public pagesTotal: number;
-  public currentPage: string | null;
+  public currentPage: string;
 
   constructor(private gamesAPIService: GamesAPIService,
               private gameService: GameCardService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router: Router) {
     this.gameService.addPlatformIcons();
   }
-
+  
   ngOnInit(): void {
-
+    this.loadGamesPerPage();
+  }
+  
+  loadGamesPerPage() {
     this.route.queryParamMap.subscribe(qparams => {
-      if (qparams.has('page')) {
-        this.currentPage = qparams.get('page');
-      } else {
-        this.currentPage = '1';
-      }
-      
-      this.gameList$ = this.gamesAPIService.getGamesPerPage(this.currentPage)
+
+      this.currentPage = qparams.get('page') ?? '1';
+      this.gamesPerPage = qparams.get('count') ?? '10';
+
+      this.gameList$ = this.gamesAPIService.getGamesPerPage(this.currentPage, this.gamesPerPage)
       .pipe(map((games: any) => {
-        console.log(games);
         this.gamesTotal = games.count;
-        this.gamesPerPage = games.results.length;
-        this.pagesTotal = Math.ceil(games.count / games.results.length);
+        this.pagesTotal = Math.ceil(games.count / +this.gamesPerPage);
         return games.results;
       }))
     })
+  }
 
+  updateGamesCountPerPage(count: string) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        count: count
+      },
+      queryParamsHandling: 'merge' // preserve the existing query params in the route
+    })
   }
 
 }

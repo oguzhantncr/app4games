@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-paginator',
@@ -8,10 +8,13 @@ import { Component, Input } from '@angular/core';
 export class PaginatorComponent {
 
   @Input() public link: string;
+  @Input() public currentPage: number;
   @Input() public pagesTotal: number;
 
+  @Output() updateAmountPerPage = new EventEmitter();
+
   public pageNumbers: number[] = [1, 2, 3, 4, 5]
-  public currentPage: number = 1;
+  public amountPerPage: string;
 
   clickPage(clickText: any) {
 
@@ -24,6 +27,10 @@ export class PaginatorComponent {
     else {
       this.currentPage = +clickText.innerText;
     }
+  }
+
+  updateAmount() {
+    this.updateAmountPerPage.emit(this.amountPerPage);
   }
 
 }

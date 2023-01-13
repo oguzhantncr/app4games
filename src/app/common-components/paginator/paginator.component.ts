@@ -10,13 +10,15 @@ export class PaginatorComponent {
   @Input() public link: string;
   @Input() public currentPage: number;
   @Input() public pagesTotal: number;
+  @Input() public pageNumbers: number[];
 
   @Output() updateAmountPerPage = new EventEmitter();
 
-  public pageNumbers: number[] = [1, 2, 3, 4, 5]
   public amountPerPage: string;
 
   clickPage(clickText: any) {
+
+    console.log(this.pagesTotal);
 
     if (clickText.innerText === "Previous") {
       this.currentPage--;
@@ -24,6 +26,12 @@ export class PaginatorComponent {
     else if (clickText.innerText === "Next") {
       this.currentPage++;
     } 
+    else if (clickText.innerText === "First") {
+      this.currentPage = 1;
+    }
+    else if (clickText.innerText === "Last") {
+      this.currentPage = this.pagesTotal;
+    }
     else {
       this.currentPage = +clickText.innerText;
     }

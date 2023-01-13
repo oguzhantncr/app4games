@@ -5,6 +5,7 @@ import { GameCardService } from '../services/game-card.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GameListService } from '../services/game-list.service';
 
 @Component({
   selector: 'app-game-list',
@@ -18,9 +19,11 @@ export class GameListComponent implements OnInit {
   public gamesTotal: number;
   public pagesTotal: number;
   public currentPage: string;
+  public pageNumbers: number[];
 
   constructor(private gamesAPIService: GamesAPIService,
               private gameService: GameCardService,
+              private gameListService: GameListService,
               private route: ActivatedRoute,
               private router: Router) {
     this.gameService.addPlatformIcons();
@@ -42,6 +45,9 @@ export class GameListComponent implements OnInit {
         this.pagesTotal = Math.ceil(games.count / +this.gamesPerPage);
         return games.results;
       }))
+
+      this.pageNumbers = this.gameListService.getPageNumbers(+this.currentPage, this.pagesTotal);
+
     })
   }
 

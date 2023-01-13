@@ -7,7 +7,7 @@
                 <app-game-card *ngFor="let gameElement of gameList$ | async" [game]="gameElement"></app-game-card>
     </div>
           
-    <app-paginator [link]="'/games'" [pagesTotal]="pagesTotal" [currentPage]="+currentPage"
+    <app-paginator [link]="'/games'" [pagesTotal]="pagesTotal" [currentPage]="+currentPage" [pageNumbers]="pageNumbers"
                    (updateAmountPerPage)="updateGamesCountPerPage($event)"></app-paginator>
 
 </div>

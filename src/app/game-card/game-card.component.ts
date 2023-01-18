@@ -1,5 +1,6 @@
 import { Component, Input} from '@angular/core';
 import { Game } from '../interfaces';
+import { GamesAPIService } from '../services/gamesAPI.service';
 
 @Component({
   selector: 'app-game-card',

@@ -18,4 +18,8 @@ export class GamesAPIService {
     return this.http.get('https://api.rawg.io/api/platforms/lists/parents?key=' + this.APIKey)
   }
 
+  getGameDetailsById(id: string) {
+    return this.http.get('https://api.rawg.io/api/games/' + id + '?key=' + this.APIKey)
+  }
+
 }

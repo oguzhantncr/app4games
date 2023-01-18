@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { GameCardComponent } from './game-card/game-card.component';
 import { GameListComponent } from './game-list/game-list.component';
 import { PaginatorComponent } from './common-components/paginator/paginator.component';
+import { GameDetailsComponent } from './game-details/game-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GameCardComponent,
     GameListComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    GameDetailsComponent
   ],
   imports: [
     FormsModule,

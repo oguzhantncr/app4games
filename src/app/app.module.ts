@@ -10,6 +10,7 @@ import { GameCardComponent } from './game-card/game-card.component';
 import { GameListComponent } from './game-list/game-list.component';
 import { PaginatorComponent } from './common-components/paginator/paginator.component';
 import { GameDetailsComponent } from './game-details/game-details.component';
+import { SearchBarComponent } from './common-components/search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { GameDetailsComponent } from './game-details/game-details.component';
     GameCardComponent,
     GameListComponent,
     PaginatorComponent,
-    GameDetailsComponent
+    GameDetailsComponent,
+    SearchBarComponent
   ],
   imports: [
     FormsModule,

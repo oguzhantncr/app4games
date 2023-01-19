@@ -18,8 +18,6 @@ export class PaginatorComponent {
 
   clickPage(clickText: any) {
 
-    console.log(this.pagesTotal);
-
     if (clickText.innerText === "Previous") {
       this.currentPage--;
     }

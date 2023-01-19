@@ -20,6 +20,7 @@ export class GameListComponent implements OnInit {
   public pagesTotal: number;
   public currentPage: string;
   public pageNumbers: number[];
+  public searchText: string;
 
   constructor(private gamesAPIService: GamesAPIService,
               private gameService: GameCardService,
@@ -38,8 +39,9 @@ export class GameListComponent implements OnInit {
 
       this.currentPage = qparams.get('page') ?? '1';
       this.gamesPerPage = qparams.get('count') ?? '10';
+      this.searchText = qparams.get('search') ?? '';
 
-      this.gameList$ = this.gamesAPIService.getGamesPerPage(this.currentPage, this.gamesPerPage)
+      this.gameList$ = this.gamesAPIService.getGamesPerPage(this.currentPage, this.gamesPerPage, this.searchText)
       .pipe(map((games: any) => {
         this.gamesTotal = games.count;
         this.pagesTotal = Math.ceil(games.count / +this.gamesPerPage);

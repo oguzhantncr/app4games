@@ -10,11 +10,30 @@ export class GamesAPIService {
 
   constructor(private http: HttpClient) { }
 
-  getGamesPerPage(page: string, perPage: string, searchText: string = '') {
+  getFilterParams(parent_platforms: string, categories: string) {
+    let filterParams = ''
+    if (parent_platforms !== '' && categories !== '') {
+      filterParams = '&parent_platforms=' + parent_platforms + '&genres=' + categories;
+    }
+    else if (parent_platforms !== '' && categories === '') {
+      filterParams = '&parent_platforms=' + parent_platforms;
+    }
+    else if (parent_platforms === '' && categories !== '') {
+      filterParams = '&genres=' + categories;
+    }
+    return filterParams;
+  }
+
+  getGamesPerPage(page: string, perPage: string, searchText: string = '', parent_platforms: string, categories: string, metacritic: string) {
+
+    let filterParams = this.getFilterParams(parent_platforms, categories);
+    
     return this.http.get('https://api.rawg.io/api/games?key=' + this.APIKey + 
                                                             '&page=' + page + 
                                                             '&page_size=' + perPage + 
-                                                            '&search=' + searchText)
+                                                            '&search=' + searchText +
+                                                            filterParams +
+                                                            '&metacritic=' + metacritic)
   }
 
   getParentPlatforms() {
@@ -23,6 +42,14 @@ export class GamesAPIService {
 
   getGameDetailsById(id: string) {
     return this.http.get('https://api.rawg.io/api/games/' + id + '?key=' + this.APIKey)
+  }
+
+  getSearchedGameOptions(searchText: string) {
+    return this.http.get('https://api.rawg.io/api/games?key=' + this.APIKey + '&search=' + searchText)
+  }
+
+  getGenres() {
+    return this.http.get('https://api.rawg.io/api/genres?key=' + this.APIKey);
   }
 
 }

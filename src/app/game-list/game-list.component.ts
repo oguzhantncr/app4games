@@ -21,6 +21,9 @@ export class GameListComponent implements OnInit {
   public currentPage: string;
   public pageNumbers: number[];
   public searchText: string;
+  public parentplatforms: string;
+  public categories: string;
+  public metacriticRatings: string;
 
   constructor(private gamesAPIService: GamesAPIService,
               private gameService: GameCardService,
@@ -38,10 +41,14 @@ export class GameListComponent implements OnInit {
     this.route.queryParamMap.subscribe(qparams => {
 
       this.currentPage = qparams.get('page') ?? '1';
-      this.gamesPerPage = qparams.get('count') ?? '10';
+      this.gamesPerPage = qparams.get('count') ?? '20';
       this.searchText = qparams.get('search') ?? '';
+      this.parentplatforms = qparams.get('parent_platforms') ?? '';
+      this.categories = qparams.get('genres') ?? '';
+      this.metacriticRatings = qparams.get('metacritic') ?? '0,100';
 
-      this.gameList$ = this.gamesAPIService.getGamesPerPage(this.currentPage, this.gamesPerPage, this.searchText)
+      this.gameList$ = this.gamesAPIService.getGamesPerPage(this.currentPage, this.gamesPerPage, this.searchText, this.parentplatforms,
+                                                            this.categories, this.metacriticRatings)
       .pipe(map((games: any) => {
         this.gamesTotal = games.count;
         this.pagesTotal = Math.ceil(games.count / +this.gamesPerPage);

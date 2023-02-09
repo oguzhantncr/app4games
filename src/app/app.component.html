@@ -1,3 +1,8 @@
-<app-search-bar></app-search-bar>
+<div class="flex">
+    <a [routerLink]="['/games']" class="my-4 mx-12 absolute">
+        <img src="../favicon.ico" alt="logo" class="h-11">
+    </a>
+    <app-search-bar class="w-full"></app-search-bar>
+</div>
 
 <router-outlet></router-outlet>

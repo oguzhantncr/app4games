@@ -1,8 +1,9 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Form, FormControl } from '@angular/forms';
 import { GamesAPIService } from 'src/app/services/gamesAPI.service';
 import { Genre, ParentPlatformInfo } from 'src/app/interfaces';
 import { Router } from '@angular/router';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-filter-dialog',
@@ -19,7 +20,9 @@ export class FilterDialogComponent implements OnInit {
   maxMetacriticRating: number = 100;
 
   constructor(private fb: FormBuilder, private gamesAPIService: GamesAPIService,
-              private router: Router) {}
+              private router: Router,
+              public dialogRef: MatDialogRef<FilterDialogComponent>) {}
+
 
   ngOnInit() {
     this.gamesAPIService.getGenres().subscribe((genres: any) => {
@@ -72,6 +75,11 @@ export class FilterDialogComponent implements OnInit {
         metacritic: this.filterForm.value.minRating.toString() + ',' + this.filterForm.value.maxRating.toString()
       }      
     })
+    this.closeFilters()
+  }
+
+  closeFilters() {
+    this.dialogRef.close()
   }
 
 }
